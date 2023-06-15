@@ -246,13 +246,7 @@
   <div class="container marketing" id="marketing1">
     <!-- Three columns of text below the carousel -->
     <div id="pacotes" class="row">
-      <div class="col-lg-4">
-        <br><br><br>
-        <img class="bd-placeholder-img rounded-circle" src="imagens/rio.jpg" width="140" height="140" alt="Rio de Janeiro">
-        <h2 class="fw-normal">Rio de Janeiro</h2>
-        <p>04 Mai-08 Mai 2023.<br>Saindo de São Paulo.<br> Pacotes a partir de R$ 700.</p>
-        <p><a class="btn btn-secondary" href="#">Confira detalhes &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
+      
     </div><!-- /.row -->
 
     <hr size="2" width="100%">
@@ -357,6 +351,23 @@
 
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      async function deletarPacote(id){
+        try{
+           await axios.delete("http://localhost:3000/pacotes/" + id );
+           window.location.reload()
+        }
+        catch(error){
+          const resposta = error.response;
+          const data = resposta.data;
+
+          if (resposta.status !== 204) {
+            alert(data.message);
+            return;
+          }
+        }
+      }
+    </script>
 
     <script>
       async function pacote() {
@@ -364,7 +375,6 @@
        const pacotes = resposta.data
 
        for(const pacote of pacotes){
-       console.log(pacote.nome)
 
 
         const card = document.createElement('div')
@@ -374,29 +384,38 @@
 
         const img = document.createElement('img')
         img.classList.add('bd-placeholder-img' , 'rounded-circle')
-        img.src = 'imagens/noronha.jpg'
+        img.src = pacote.imagem // 'imagens/noronha.jpg'
         img.width = 140
         img.height = 140
-        img.alt = 'Rio de Janeiro' 
+        img.alt = pacote.nome
 
         const fonte = document.createElement('h2')
         fonte.classList.add('fw-normal')
         fonte.innerHTML = pacote.nome
 
         const p = document.createElement('p')
-        p.innerHTML = pacote.data
+        p.innerHTML = new Date(pacote.data).toLocaleString('pt-BR', { timezone: 'UTC' })
 
         const saida = document.createElement('p')
-        saida.innerHTML = 'Saindo de São Paulo'
+        saida.innerHTML = 'Saindo de ' + pacote.origem
 
         const passagem = document.createElement('p')
-        passagem.innerHTML = 'Passagem a partir de R$ ' + pacote.preco
+        passagem.innerHTML = 'Passagem a partir de ' + new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(
+    pacote.preco)
+
 
         const a = document.createElement('a')
         a.classList.add('btn' , 'btn-secondary')
         a.href = 'reserva.html'
         a.target = '_blank'
         a.innerHTML = 'Confira detalhes &raquo;'
+
+        const excluir= document.createElement("button")
+        excluir.innerHTML="Deletar"
+        excluir.classList.add('btn' , 'btn-danger', 'ms-1')
+        excluir.onclick = async function() {
+          await deletarPacote(pacote._id)
+        }
 
         card.appendChild(br)
         card.appendChild(br)
@@ -411,6 +430,7 @@
         card.appendChild(passagem)
 
         card.appendChild(a)
+        card.appendChild(excluir)
 
         const divPacotes = document.getElementById("pacotes")
 
