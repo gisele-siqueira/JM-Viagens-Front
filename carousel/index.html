@@ -8,6 +8,8 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.111.3">
     <title>Bem vindo ao JM Viagens</title>
+    <!-- Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
 
@@ -243,26 +245,12 @@
 
   <div class="container marketing" id="marketing1">
     <!-- Three columns of text below the carousel -->
-    <div class="row">
+    <div id="pacotes" class="row">
       <div class="col-lg-4">
         <br><br><br>
         <img class="bd-placeholder-img rounded-circle" src="imagens/rio.jpg" width="140" height="140" alt="Rio de Janeiro">
         <h2 class="fw-normal">Rio de Janeiro</h2>
         <p>04 Mai-08 Mai 2023.<br>Saindo de São Paulo.<br> Pacotes a partir de R$ 700.</p>
-        <p><a class="btn btn-secondary" href="#">Confira detalhes &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <br><br><br>
-        <img class="bd-placeholder-img rounded-circle" src="imagens/ny.jpg" width="140" height="140" alt="Nova York">
-        <h2 class="fw-normal">Nova York</h2>
-        <p>14 Mai-21 Mai 2023.<br>Saindo de São Paulo.<br> Pacotes a partir de R$ 3000.</p>
-        <p><a class="btn btn-secondary" href="#"> Confira detalhes &raquo;</a></p>
-      </div><!-- /.col-lg-4 -->
-      <div class="col-lg-4">
-        <br><br><br>
-        <img class="bd-placeholder-img rounded-circle" src="imagens/paris.jpg" width="140" height="140" alt="Nova York">
-        <h2 class="fw-normal">Paris</h2>
-        <p>14 Jun-20 Jun 2023.<br>Saindo de Recife.<br> Pacotes a partir de R$ 2500.</p>
         <p><a class="btn btn-secondary" href="#">Confira detalhes &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
@@ -370,6 +358,79 @@
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+      async function pacote() {
+        const resposta = await axios.get('http://localhost:3000/pacotes')
+       const pacotes = resposta.data
+
+       for(const pacote of pacotes){
+       console.log(pacote.nome)
+
+
+        const card = document.createElement('div')
+        card.classList.add('col-lg-4')
+
+        const br = document.createElement('br')
+
+        const img = document.createElement('img')
+        img.classList.add('bd-placeholder-img' , 'rounded-circle')
+        img.src = 'imagens/noronha.jpg'
+        img.width = 140
+        img.height = 140
+        img.alt = 'Rio de Janeiro' 
+
+        const fonte = document.createElement('h2')
+        fonte.classList.add('fw-normal')
+        fonte.innerHTML = pacote.nome
+
+        const p = document.createElement('p')
+        p.innerHTML = pacote.data
+
+        const saida = document.createElement('p')
+        saida.innerHTML = 'Saindo de São Paulo'
+
+        const passagem = document.createElement('p')
+        passagem.innerHTML = 'Passagem a partir de R$ ' + pacote.preco
+
+        const a = document.createElement('a')
+        a.classList.add('btn' , 'btn-secondary')
+        a.href = 'reserva.html'
+        a.target = '_blank'
+        a.innerHTML = 'Confira detalhes &raquo;'
+
+        card.appendChild(br)
+        card.appendChild(br)
+        card.appendChild(br)
+
+        card.appendChild(img)
+
+        card.appendChild(fonte)
+
+        card.appendChild(p)
+        card.appendChild(saida)
+        card.appendChild(passagem)
+
+        card.appendChild(a)
+
+        const divPacotes = document.getElementById("pacotes")
+
+        divPacotes.appendChild(card)
+       }
+
+        
+      }
+      pacote()
+
       
+
+    </script>
+    <!-- <div class="col-lg-4">
+      <br><br><br>
+      
+      <img class="bd-placeholder-img rounded-circle" src="imagens/noronha.jpg" width="140" height="140" alt="Rio de Janeiro">
+      <h2 class="fw-normal">Noronha</h2>
+      <p>04 Mai-08 Mai 2023.<br>Saindo de São Paulo.<br> Passagens a partir de R$ 700.</p>
+      <p><a class="btn btn-secondary" href="reserva.html" target="_blank">Confira detalhes &raquo;</a></p>
+    </div> -->
   </body>
 </html>
