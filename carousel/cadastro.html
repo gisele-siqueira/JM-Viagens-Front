@@ -398,26 +398,49 @@
 
             <hr class="my-4" />
 
-            <button class="w-100 btn btn-primary btn-lg" type="submit">
+            <button class=" btn btn-primary " type="submit">
               Finalize seu cadastro
             </button>
           </form>
         </div>
+        <br>
+          <div class="col-md-6">
+            <h2>Atualizar dados do usuário</h2>
+            
+            <form id="update-form">
+              <!-- Campos do formulário de atualização aqui -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="emailalterar" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="update-endereco" class="form-label">Novo Endereço</label>
+                <input type="endereco" class="form-control" id="novoendereco" name="update-endereco" required>
+              </div>
+              <div class="mb-3">
+                <label for="update-senha" class="form-label">Nova Senha</label>
+                <input type="senha" class="form-control" id="novasenha" name="update-senha" required>
+              </div>
+              
+
+              <!-- Outros campos do formulário de atualização aqui -->
+              <div class="d-flex gap-2">
+              <button type="submit" class="btn btn-primary" onclick="atualizarUsuario(event)">Atualizar</button>
+              <button type="submit" class="btn btn-danger" onclick="deletarUsuario(event)">Deletar</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </main>
 
-      <footer class="my-5 pt-5 text-body-secondary text-center text-small">
-        <p class="mb-1">&copy; 2017-2023 Company Name</p>
-        <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Privacy</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-      </footer>
+      
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="checkout.js"></script>
+
 
     <script>
       // Capturar o evento de envio do formulário
@@ -472,5 +495,49 @@
           }
         });
     </script>
+
+     <script>
+      function atualizarUsuario(event) {
+        event.preventDefault(); 
+        const emailalterar=document.getElementById('emailalterar').value;
+        const novoendereco = document.getElementById('novoendereco').value;
+        const novasenha = document.getElementById('novasenha').value;
+        console.log(emailalterar,novoendereco,novasenha);
+
+        axios.put('http://localhost:3000/atualizar-usuario', {
+          
+          updateEndereco: novoendereco,
+          emailalterar:emailalterar,
+          updateSenha: novasenha
+        })
+        .then(response => {
+          alert(response.data.message);
+          // Faça algo com a resposta de sucesso, se necessário
+        })
+        .catch(error => {
+          alert(error.response.data.message);
+          // Trate o erro, se necessário
+        });
+      }
+    </script>
+    <script>
+      function deletarUsuario(event) {
+        event.preventDefault(); 
+        const emailalterar=document.getElementById('emailalterar').value;
+        
+        
+        axios.delete('http://localhost:3000/deletarusuario/' + emailalterar)
+        .then(response => {
+          alert(response.data.message);
+          // Faça algo com a resposta de sucesso, se necessário
+        })
+        .catch(error => {
+          alert(error.response.data.message);
+          // Trate o erro, se necessário
+        });
+      }
+
+    </script>
+
   </body>
 </html>

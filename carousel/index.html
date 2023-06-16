@@ -444,6 +444,19 @@
       
 
     </script>
+
+<script>
+  
+      async function retornaLista() {
+        const resposta = await axios.get('http://localhost:3000/listacadastrados')
+       const cadastrados = resposta.data
+
+       for(const cadastrado of cadastrados){
+        console.log(cadastrado)
+       }}
+       retornaLista()
+
+</script>
     <!-- <div class="col-lg-4">
       <br><br><br>
       
