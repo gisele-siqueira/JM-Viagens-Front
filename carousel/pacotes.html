@@ -272,21 +272,21 @@
 
     <div class="container">
       <main>
-        <div class="py-5 text-center">
-          <h2>Página de cadastro</h2>
-          <p class="lead">Preencha os campos abaixo com os seus dados:</p>
+        <div >
+          <h2>Cadastro Pacotes </h2>
+          <p class="lead">Preencha os campos abaixo com os dados do pacote:</p>
         </div>
 
         <div class="col-md-7 col-lg-8">
-          <h4 class="mb-3">Dados pessoais</h4>
-          <form id="formulario" class="needs-validation" novalidate>
+          <h4 class="mb-3">Dados do pacote</h4>
+          <form id="formulario2" class="needs-validation" novalidate>
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">Nome</label>
+                <label for="firstName" class="form-label">Nome Pacote</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="nome"
+                  id="nomepacote"
                   placeholder=""
                   value=""
                   required
@@ -295,16 +295,15 @@
                   Valid first name is required.
                 </div>
               </div>
-
               <div class="col-12">
-                <label for="username" class="form-label">Username</label>
+                <label for="username" class="form-label">Data</label>
                 <div class="input-group has-validation">
-                  <span class="input-group-text">@</span>
+                  
                   <input
-                    type="text"
+                    type="date"
                     class="form-control"
-                    id="username"
-                    placeholder="Username"
+                    id="data"
+                    placeholder=""
                     required
                   />
                   <div class="invalid-feedback">Your username is required.</div>
@@ -312,12 +311,27 @@
               </div>
 
               <div class="col-12">
-                <label for="senha" class="form-label">Senha</label>
+                <label for="username" class="form-label">Origem</label>
+                <div class="input-group has-validation">
+                 
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="origem"
+                    placeholder=""
+                    required
+                  />
+                  <div class="invalid-feedback">Your username is required.</div>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <label for="senha" class="form-label">Preço </label>
                 <input
-                  type="password"
+                  type="number"
                   class="form-control"
-                  id="senha"
-                  placeholder="********"
+                  id="preco"
+                  placeholder=""
                   required
                 />
                 <div class="invalid-feedback">
@@ -325,75 +339,16 @@
                 </div>
               </div>
 
-              <div class="col-12">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="you@example.com"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please enter a valid email address for shipping updates.
-                </div>
+              
               </div>
 
-              <div class="col-12">
-                <label for="address" class="form-label">Endereço</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="endereco"
-                  placeholder="Rua 1234"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
+             
 
-              <div class="col-12">
-                <label for="pais" class="form-label">País</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="pais"
-                  placeholder="Brasil"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
+              
 
-              <div class="col-12">
-                <label for="estado" class="form-label">Estado</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="estado"
-                  placeholder="Ceará"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
+              
 
-              <div class="col-12">
-                <label for="cep" class="form-label">CEP</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="cep"
-                  placeholder="00.000-00"
-                  required
-                />
-                <div class="invalid-feedback">
-                  Please enter your shipping address.
-                </div>
-              </div>
+              
             </div>
 
             <hr class="my-4" />
@@ -404,29 +359,29 @@
           </form>
         </div>
         <br>
-          <div >
-            <h2>Atualizar/Deletar dados do usuário</h2>
+         <div >
+            <h2 margin="10px">Atualizar dados do pacote</h2>
             
             <form id="update-form">
               <!-- Campos do formulário de atualização aqui -->
               <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="emailalterar" name="email" required>
+                <label  for="nome" class="form-label">Nome Pacote</label>
+                <input type="text" class="form-control" id="nomealterar" name="email" required>
               </div>
               <div class="mb-3">
-                <label for="update-endereco" class="form-label">Novo Endereço</label>
-                <input type="endereco" class="form-control" id="novoendereco" name="update-endereco" required>
+                <label for="update-origem" class="form-label">Nova Origem</label>
+                <input type="text" class="form-control" id="novaorigem" name="update-endereco" required>
               </div>
               <div class="mb-3">
-                <label for="update-senha" class="form-label">Nova Senha</label>
-                <input type="senha" class="form-control" id="novasenha" name="update-senha" required>
+                <label for="update-data" class="form-label">Nova Data</label>
+                <input type="date" class="form-control" id="novadata" name="update-senha" required>
               </div>
               
 
               <!-- Outros campos do formulário de atualização aqui -->
               <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-primary" onclick="atualizarUsuario(event)">Atualizar</button>
-              <button type="submit" class="btn btn-danger" onclick="deletarUsuario(event)">Deletar</button>
+              <button type="submit" class="btn btn-primary" onclick="atualizarPacote(event)">Atualizar</button>
+             
               </div>
             </form>
           </div>
@@ -443,101 +398,69 @@
 
 
     <script>
-      // Capturar o evento de envio do formulário
-      document
-        .getElementById("formulario")
-        .addEventListener("submit", async function (event) {
-          event.preventDefault(); // Impedir o envio padrão do formulário
-
-          // Obter os valores dos campos do formulário
-          var nome = document.getElementById("nome").value;
-          var username = document.getElementById("username").value;
-          var senha = document.getElementById("senha").value;
-          var email = document.getElementById("email").value;
-          var endereco = document.getElementById("endereco").value;
-          var pais = document.getElementById("pais").value;
-          var estado = document.getElementById("estado").value;
-          var cep = document.getElementById("cep").value;
-
-          // Criar um objeto com os dados do formulário
-          var formData = {
+        async function cadastrarPacote() {
+          const nome = document.getElementById('nomepacote').value;
+          const data = document.getElementById('data').value;
+          const origem = document.getElementById('origem').value;
+          const preco = document.getElementById('preco').value;
+      
+          const novoPacote = {
             nome: nome,
-            username: username,
-            senha: senha,
-            email: email,
-            endereco: endereco,
-            pais: pais,
-            estado: estado,
-            cep: cep,
-            // outros campos do formulário...
+            data: data,
+            origem: origem,
+            preco: preco
           };
-
-          // Enviar uma requisição POST para a rota do Node.js
-          const response = await axios.post(
-            "http://localhost:3000/cadastro",
-            formData
-          );
-
-          if ((response.status = 200)) {
-            alert("Dados enviados com sucesso!");
-            // Limpar os campos do formulário, se necessário
-            document.getElementById("nome").value = "";
-            document.getElementById("username").value = "";
-            document.getElementById("senha").value = "";
-            document.getElementById("email").value = "";
-            document.getElementById("endereco").value = "";
-            document.getElementById("pais").value = "";
-            document.getElementById("estado").value = "";
-            document.getElementById("cep").value = "";
-            // outros campos do formulário...
-          } else {
-            throw new Error("Erro ao enviar os dados do formulário.");
+      
+          try {
+            const resposta = await axios.post('http://localhost:3000/inserirpacotes', novoPacote);
+      
+            if (resposta.status === 201) {
+              alert('Pacote cadastrado com sucesso!');
+              // Redirecionar para a página de lista de pacotes ou fazer alguma outra ação necessária
+            } else {
+              alert('Ocorreu um erro ao cadastrar o pacote.');
+            }
+          } catch (erro) {
+            console.log(erro);
+            alert('Ocorreu um erro ao cadastrar o pacote.');
           }
+        }
+      
+        const formulario = document.getElementById('formulario2');
+        formulario.addEventListener('submit', function(event) {
+          event.preventDefault(); // Impede o envio padrão do formulário
+          cadastrarPacote();
         });
-    </script>
-
-     <script>
-      function atualizarUsuario(event) {
-        event.preventDefault(); 
-        const emailalterar=document.getElementById('emailalterar').value;
-        const novoendereco = document.getElementById('novoendereco').value;
-        const novasenha = document.getElementById('novasenha').value;
-        console.log(emailalterar,novoendereco,novasenha);
-
-        axios.put('http://localhost:3000/atualizar-usuario', {
-          
-          updateEndereco: novoendereco,
-          emailalterar:emailalterar,
-          updateSenha: novasenha
-        })
-        .then(response => {
-          alert(response.data.message);
-          // Faça algo com a resposta de sucesso, se necessário
-        })
-        .catch(error => {
-          alert(error.response.data.message);
-          // Trate o erro, se necessário
-        });
-      }
-    </script>
-    <script>
-      function deletarUsuario(event) {
-        event.preventDefault(); 
-        const emailalterar=document.getElementById('emailalterar').value;
+      </script>
+      <script>
         
-        
-        axios.delete('http://localhost:3000/deletarusuario/' + emailalterar)
-        .then(response => {
-          alert(response.data.message);
-          // Faça algo com a resposta de sucesso, se necessário
-        })
-        .catch(error => {
-          alert(error.response.data.message);
-          // Trate o erro, se necessário
-        });
-      }
+  function atualizarPacote(event) {
+    event.preventDefault(); 
 
-    </script>
+    const nomealterar = document.getElementById('nomealterar').value;
+    const novaorigem = document.getElementById('novaorigem').value;
+    const novadata = document.getElementById('novadata').value;
+  
+    axios.put('http://localhost:3000/atualizarpacotes', {
+      nomealterar: nomealterar,
+      updateOrigem: novaorigem,
+      updateData: novadata
+    })
+    .then(response => {
+      alert(response.data.message);
+      // Faça algo com a resposta de sucesso, se necessário
+    })
+    .catch(error => {
+      alert('Ocorreu um erro ao atualizar o pacote.');
+      console.log(error);
+      // Trate o erro, se necessário
+    });
+  }
 
+  
+
+
+      </script>
+      
   </body>
 </html>
