@@ -274,19 +274,19 @@
       <main>
         <div >
           <h2>Cadastro Pacotes </h2>
-          <p class="lead">Preencha os campos abaixo com os dados do pacote:</p>
+          <p class="lead">Preencha os campos abaixo com os dados do Hotel:</p>
         </div>
 
         <div class="col-md-7 col-lg-8">
-          <h4 class="mb-3">Dados do pacote</h4>
-          <form id="formulario2" class="needs-validation" novalidate>
+          <h4 class="mb-3">Dados do Hotel</h4>
+          <form id="formulario3" class="needs-validation" novalidate>
             <div class="row g-3">
               <div class="col-sm-6">
-                <label for="firstName" class="form-label">Nome Pacote</label>
+                <label for="firstName" class="form-label">Nome Hotel</label>
                 <input
                   type="text"
                   class="form-control"
-                  id="nomepacote"
+                  id="nomehotel"
                   placeholder=""
                   value=""
                   required
@@ -296,13 +296,13 @@
                 </div>
               </div>
               <div class="col-12">
-                <label for="username" class="form-label">Data</label>
+                <label for="username" class="form-label">Local</label>
                 <div class="input-group has-validation">
                   
                   <input
-                    type="date"
+                    type="text"
                     class="form-control"
-                    id="data"
+                    id="localhotel"
                     placeholder=""
                     required
                   />
@@ -311,13 +311,13 @@
               </div>
 
               <div class="col-12">
-                <label for="username" class="form-label">Origem</label>
+                <label for="username" class="form-label">Classificação</label>
                 <div class="input-group has-validation">
                  
                   <input
                     type="text"
                     class="form-control"
-                    id="origem"
+                    id="classhotel"
                     placeholder=""
                     required
                   />
@@ -326,11 +326,11 @@
               </div>
 
               <div class="col-12">
-                <label for="senha" class="form-label">Preço </label>
+                <label for="senha" class="form-label">Diária </label>
                 <input
                   type="number"
                   class="form-control"
-                  id="preco"
+                  id="precohotel"
                   placeholder=""
                   required
                 />
@@ -360,27 +360,25 @@
         </div>
         <br>
          <div >
-            <h2 >Atualizar dados do pacote</h2>
+            <h2 margin="10px">Atualizar dados do Hotel</h2>
             
             <form id="update-form">
               <!-- Campos do formulário de atualização aqui -->
               <div class="mb-3">
-                <label  for="nome" class="form-label">Nome Pacote</label>
-                <input type="text" class="form-control" id="nomealterar" name="email" required>
+                <label  for="nome" class="form-label">Nome Hotel</label>
+                <input type="text" class="form-control" id="nomehotelalterar" name="email" required>
               </div>
               <div class="mb-3">
-                <label for="update-origem" class="form-label">Nova Origem</label>
-                <input type="text" class="form-control" id="novaorigem" name="update-endereco" required>
+                <label for="update-origem" class="form-label">Nova Diária</label>
+                <input type="number" class="form-control" id="novadiaria" name="update-endereco" required>
               </div>
-              <div class="mb-3">
-                <label for="update-data" class="form-label">Nova Data</label>
-                <input type="date" class="form-control" id="novadata" name="update-senha" required>
-              </div>
+              
               
 
               <!-- Outros campos do formulário de atualização aqui -->
               <div class="d-flex gap-2">
-              <button type="submit" class="btn btn-primary" onclick="atualizarPacote(event)">Atualizar</button>
+              <button type="submit" class="btn btn-primary" onclick="atualizarHotel(event)" >Atualizar</button>
+              <button type="submit" class="btn btn-danger" onclick="deletarHotel(event)">Deletar</button>
              
               </div>
             </form>
@@ -398,69 +396,101 @@
 
 
     <script>
-        async function cadastrarPacote() {
-          const nome = document.getElementById('nomepacote').value;
-          const data = document.getElementById('data').value;
-          const origem = document.getElementById('origem').value;
-          const preco = document.getElementById('preco').value;
+        async function cadastrarHotel() {
+          const nome = document.getElementById('nomehotel').value;
+          const classificacao = document.getElementById('classhotel').value;
+          const diaria = document.getElementById('precohotel').value;
+          const local = document.getElementById('localhotel').value;
+          
       
-          const novoPacote = {
+          const novoHotel = {
             nome: nome,
-            data: data,
-            origem: origem,
-            preco: preco
+            classificacao: classificacao,
+            diaria: diaria,
+            local:local
+            
           };
       
           try {
-            const resposta = await axios.post('http://localhost:3000/inserirpacotes', novoPacote);
+            const resposta = await axios.post('http://localhost:3000/inserirhotel', novoHotel);
       
             if (resposta.status === 201) {
-              alert('Pacote cadastrado com sucesso!');
+              alert('Hotel cadastrado com sucesso!');
               // Redirecionar para a página de lista de pacotes ou fazer alguma outra ação necessária
             } else {
-              alert('Ocorreu um erro ao cadastrar o pacote.');
+              alert('Ok.');
             }
           } catch (erro) {
             console.log(erro);
-            alert('Ocorreu um erro ao cadastrar o pacote.');
+            alert('Ok.');
           }
         }
       
-        const formulario = document.getElementById('formulario2');
+        const formulario = document.getElementById('formulario3');
         formulario.addEventListener('submit', function(event) {
           event.preventDefault(); // Impede o envio padrão do formulário
-          cadastrarPacote();
+          cadastrarHotel();
         });
       </script>
-      <script>
-        
-  function atualizarPacote(event) {
+
+<script>
+    function atualizarHotel(event) {
     event.preventDefault(); 
 
-    const nomealterar = document.getElementById('nomealterar').value;
-    const novaorigem = document.getElementById('novaorigem').value;
-    const novadata = document.getElementById('novadata').value;
+    const nomehotelalterar = document.getElementById('nomehotelalterar').value;
+    const novadiaria = document.getElementById('novadiaria').value;
+    
   
-    axios.put('http://localhost:3000/atualizarpacotes', {
-      nomealterar: nomealterar,
-      updateOrigem: novaorigem,
-      updateData: novadata
+    axios.put('http://localhost:3000/atualizarhotel', {
+      nomehotelalterar: nomehotelalterar,
+      novadiaria: novadiaria,
+      
     })
     .then(response => {
       alert(response.data.message);
       // Faça algo com a resposta de sucesso, se necessário
     })
     .catch(error => {
-      alert('Ok.');
+      alert('Ocorreu um erro ao atualizar o Hotel.');
       console.log(error);
       // Trate o erro, se necessário
     });
   }
 
+</script>
+
+<script>
+    function deletarHotel(event) {
+  event.preventDefault(); 
+
+  const nomehotel = document.getElementById('nomehotelalterar').value;
+
+  axios.delete('http://localhost:3000/deletarhotel/' + nomehotel)
+    .then(response => {
+      alert(response.data.message);
+      // Faça algo com a resposta de sucesso, se necessário
+    })
+    .catch(error => {
+      alert(error.response.data.message);
+      // Trate o erro, se necessário
+    });
+}
+
+
+  </script>
+ <script>
+    async function retornaListaHoteis() {
+      try {
+        const resposta = await axios.get('http://localhost:3000/listahoteis');
+        const hoteis = resposta.data;
+        console.log(hoteis);
+      } catch (erro) {
+        console.log(erro);
+      }
+    }
+    retornaListaHoteis();
+  </script>
   
-
-
-      </script>
       
   </body>
 </html>
